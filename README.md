@@ -33,3 +33,12 @@ On any linux system:
 
 * sacscale_style.json
     * In this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
+
+* Tileserver for testing
+To serve your tiles use the demonstration server:
+
+cd server
+# ruby server.rb /path/to/your/output.mbtiles
+# You can now navigate to http://localhost:8080/ and see your map!
+
+(If you don't already have them, you'll need to install Ruby and the required gems to run the demonstration server. On Ubuntu, for example, sudo apt install sqlite3 libsqlite3-dev ruby ruby-dev and then sudo gem install sqlite3 cgi glug rack.)
