@@ -25,7 +25,7 @@ On any linux system:
 * load URL/index.html into your browser
 
 ##Files
-* config-openmaptiles.json
+* config-openmaptiles.json (config-openmaptiles.json)
 * * In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
 
 * process-openmaptiles.lua
