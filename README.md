@@ -38,6 +38,7 @@ On any linux system:
 To serve your tiles use the demonstration server:
 
 *cd server*
+
 *ruby server.rb /path/to/your/output.mbtiles*
 
 You can now navigate to http://localhost:8080/ and see your map!
