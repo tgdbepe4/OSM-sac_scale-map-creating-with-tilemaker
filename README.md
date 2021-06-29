@@ -26,7 +26,7 @@ On any linux system:
 
 ##Files
 * config-openmaptiles.json (config-openmaptiles.json.ori)
-** In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
+    * In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
 
 * process-openmaptiles.lua (process-openmaptiles.lua .ori)
     * This file describes which OSM tag is rendered and which attribute are added.
