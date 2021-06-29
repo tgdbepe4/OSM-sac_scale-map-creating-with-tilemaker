@@ -26,10 +26,10 @@ On any linux system:
 
 ##Files
 * config-openmaptiles.json (config-openmaptiles.json.ori)
-* * In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
+** In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
 
 * process-openmaptiles.lua (process-openmaptiles.lua .ori)
 * * This file describes which OSM tag is rendered and which attribute are added.
 
 * sacscale_style.json
-* * In this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
+** In this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
