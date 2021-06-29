@@ -9,6 +9,8 @@ The idea is to create a map which shows the difficulties of hiking pathes and tr
 ## Tool for creation of vector tiles
 https://github.com/systemed/tilemaker has created an excelent tool to create vector tiles. The tool allows to use as input an OSM pbf file and create from an mbtiles file which can be use from different tile servers. For this project only the tileserver-php software was used. 
 
+
+
 ## Making of with Switzerland OSM pbf file
 
 On any linux system:
@@ -22,4 +24,12 @@ On any linux system:
 * service apache2 start
 * load URL/index.html into your browser
 
+##Files
+* config-openmaptiles.json
+* * In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
 
+* process-openmaptiles.lua
+* * This file describes which OSM tag is rendered and which attribute are added.
+
+* sacscale_style.json
+** In this file the look and feel is described, e.E. If a river is persent in which colour and if the river name is shown.
