@@ -24,17 +24,19 @@ On any linux system:
 * service apache2 start
 * load URL/index.html into your browser
 
-##Files
-* config-openmaptiles.json (config-openmaptiles.json.ori)
-    * In this file is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
+## Files
+### config-openmaptiles.json (config-openmaptiles.json.ori)
+In this file it is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
+#### Additonal shapefiles in config
+It is also possible to add own self created shapefiles to the config file.
 
-* process-openmaptiles.lua (process-openmaptiles.lua .ori)
-    * This file describes which OSM tag is rendered and which attribute are added.
+### process-openmaptiles.lua (process-openmaptiles.lua .ori)
+his file describes which OSM tag is rendered and which attribute are added.
 
-* sacscale_style.json
-    * In this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
+### sacscale_style.json
+n this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
 
-* Tileserver for testing
+## Tileserver for testing
 To serve your tiles use the demonstration server:
 
 *cd server*
