@@ -115,7 +115,33 @@ Add the end of the lua file:
 
 ### switzerland_style.json
 In this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map.
-The original file was at many places modified, extended and re ordered. Please the complete file for the source.
+The original file was at many places modified, extended and re ordered. Please check the complete file for the source.
+#### 2D and 3D
+Near at the end of the "*style.json" add this to make 3D buildings visible:
+
+    
+    {
+      "id": "building-3d",
+      "type": "fill-extrusion",
+      "source": "openmaptiles",
+      "source-layer": "building",
+      "minzoom": 14,
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "fill-extrusion-color": "rgba(203, 198, 198, 1)",
+        "fill-extrusion-height": {
+          "property": "render_height",
+          "type": "identity"
+        },
+        "fill-extrusion-base": {
+          "property": "render_min_height",
+          "type": "identity"
+        },
+        "fill-extrusion-opacity": 0.9
+      }
+    },
+If the fill-extrusion-opacity is lower 0.9 then you see the steets going through the buildings which is not very nice. For reason the building-3d part should be near by the end of the file.
+An other problem viwe 3D buildings is that house number are always place on the ground. This has the effect, that are shown at a strange place. For this reason there are two HTML files used, one for 2D with house numbers and one for 3D without house numbers.
 
 ## Tileserver for testing
 To serve your tiles use the demonstration server:
@@ -126,3 +152,88 @@ To serve your tiles use the demonstration server:
 You can now navigate to http://localhost:8080/ and see your map!  This map is very helpful because it shows from each obkject the attributes as well.
 
 (If you don't already have them, you'll need to install Ruby and the required gems to run the demonstration server. On Ubuntu, for example, sudo apt install sqlite3 libsqlite3-dev ruby ruby-dev and then sudo gem install sqlite3 cgi glug rack.)
+
+## HTML file on server
+To control the 3D in the browser add after style: 'switzerland_style_3D.json'
+
+    style: 'switzerland_style_3D.json',
+    pitch: 60, // pitch in degrees
+    bearing: 20, // bearing in degrees
+    maxBounds: bounds 
+
+        <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <title>OSM "sac_scale" map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+    </head>
+    <body>
+    <div id="map"></div>
+    <script>
+    var bounds = [ [5.893, 45.748], [10.6318, 47.8541] ];
+    	mapboxgl.accessToken = 'pk.eyJ1IjoidGdkYmVwZTQiLCJhIjoiY2trYmJxcWZmMGN2cjJucWp2NTZuYnRwMiJ9.6_xPbpP13tLTVNUk2cMq0Q';
+    var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v10',
+    
+      center: [ (bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2],
+      center: [8.5, 47.35], // starting position [lng, lat],
+        zoom: 14,
+      minZoom: 5,
+      style: 'switzerland_style_3D.json',
+      pitch: 60, // pitch in degrees
+      bearing: 20, // bearing in degrees
+      maxBounds: bounds 
+    });
+     
+    map.on('load', function () {
+    map.addSource('mapbox-terrain', {
+    type: 'vector',
+    // Use any Mapbox-hosted tileset using its tileset id.
+    // Learn more about where to find a tileset id:
+    // https://docs.mapbox.com/help/glossary/tileset-id/
+    url: 'mapbox://mapbox.mapbox-terrain-v2'
+    });
+    map.addLayer({
+    'id': 'terrain-data',
+    'type': 'line',
+    'source': 'mapbox-terrain',
+    'source-layer': 'contour',
+    'layout': {
+    'line-join': 'round',
+    'line-cap': 'round'
+    },
+    'paint': {
+    'line-color': '#0387C5',
+    'line-width': 0.5
+    }
+    });
+    });
+    
+    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.FullscreenControl());
+    // Add geolocate control to the map.
+    map.addControl(
+    new mapboxgl.GeolocateControl({
+    positionOptions: {
+    enableHighAccuracy: true
+    },
+    trackUserLocation: true
+    })
+    );
+    </script>
+    <!-- <div id="osm">©<a href="http://www.openstreetmap.org">OpenStreetMap</a>
+      und <a href="http://www.openstreetmap.org/copyright">Mitwirkende</a>,
+      <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.de">CC-BY-SA</a>
+    </div> -->
+    </body>
+    </html>
+    <!-- Copy
+    © MapboxTermsPrivacySecurity -->
