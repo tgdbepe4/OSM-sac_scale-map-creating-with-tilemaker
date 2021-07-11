@@ -3,9 +3,9 @@
 
 ## Demo
 https://sacscale.bergi-it-consulting.ch/index.html
-3D view of Zurich
+#### 3D view of Zurich
 ![image](https://user-images.githubusercontent.com/46052442/125194385-5dde2500-e251-11eb-84c2-542569fcd133.png)
-2D view of Zurich and the sac_scale pathes
+#### 2D view of Zurich and the sac_scale pathes
 ![image](https://user-images.githubusercontent.com/46052442/125194454-aeee1900-e251-11eb-95ce-082b485209ef.png)
 
 
