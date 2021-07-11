@@ -61,7 +61,22 @@ Performed in this way:
  Now you be able to see the cliffs as lines
 
 ### process-openmaptiles.lua (process-openmaptiles.lua .ori)
-his file describes which OSM tag is rendered and which attribute are added.
+This file describes which OSM tag is rendered and which attribute are added.
+#### Addings to lua
+Expanding the values, near line 128:
+landuseKeys     = Set { "school", "university", "kindergarten", "college", "library", "hospital",
+                        "railway", "cemetery", "military", "residential", "commercial", "industrial",
+                        "retail", "stadium", "pitch", "playground", "theme_park", "bus_station", "zoo",
+					    "farmyard" }
+landcoverKeys   = { wood="wood", forest="wood",
+                    wetland="wetland",
+                    beach="sand", sand="sand",
+                    farmland="farmland", farm="farmland", orchard="farmland", vineyard="farmland", plant_nursery="farmland",
+                    glacier="ice", ice_shelf="ice",
+					bare_rock="bare_rock", rock="rock", cliff="cliff",
+					scree="scree",
+                    grassland="grass", grass="grass", meadow="grass", allotments="grass", park="grass", village_green="grass", recreation_ground="grass", garden="grass", golf_course="grass" }
+
 
 ### sacscale_style.json
 n this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
