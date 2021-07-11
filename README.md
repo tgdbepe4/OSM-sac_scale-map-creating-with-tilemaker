@@ -3,6 +3,8 @@
 
 ## Demo
 https://sacscale.bergi-it-consulting.ch/index.html
+![image](https://user-images.githubusercontent.com/46052442/125194385-5dde2500-e251-11eb-84c2-542569fcd133.png)
+
 
 ## Introduction
 The idea is to create a map which shows the difficulties of hiking pathes and tracks for the Open Street Map source. The attribute "sac_scale" can be used in OSM to declare the difficulty of hiking pathes, https://wiki.openstreetmap.org/wiki/DE:Key:sac_scale. At the moment the usage of this attribute is far a way to be compete but in higher alpine regions many pathes are available with it. 
