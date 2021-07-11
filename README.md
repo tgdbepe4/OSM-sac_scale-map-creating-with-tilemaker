@@ -1,3 +1,4 @@
+
 # OSM-sac_scale-map-creating-with-tilemaker
 
 ## Demo
@@ -38,7 +39,7 @@ Performed in this way:
 * Add a line "cliff": 			 { "minzoom": 6,  "maxzoom": 14, "source": "data/cliffs_switzerland_4326.shp"}," near line 28 into file config-openmaptiles.json
 * Add some lines into switzerland_style.json:
 
-    {
+      {
       "id": "cliff",
       "type": "line",
       "source": "openmaptiles",
@@ -56,7 +57,7 @@ Performed in this way:
         "line-width": {"base": 1.2, "stops": [[14, 1.5], [20, 10]]},
         "line-opacity": 1
       }
-    },
+      },
  
  Now you be able to see the cliffs as lines
 
