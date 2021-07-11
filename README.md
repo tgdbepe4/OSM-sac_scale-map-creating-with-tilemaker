@@ -63,12 +63,14 @@ Performed in this way:
 ### process-openmaptiles.lua (process-openmaptiles.lua .ori)
 This file describes which OSM tag is rendered and which attribute are added.
 #### Addings to lua
+##### landuseKeys and landcoverKeys
 Expanding the values, near line 128:
-landuseKeys     = Set { "school", "university", "kindergarten", "college", "library", "hospital",
+
+    landuseKeys     = Set { "school", "university", "kindergarten", "college", "library", "hospital",
                         "railway", "cemetery", "military", "residential", "commercial", "industrial",
                         "retail", "stadium", "pitch", "playground", "theme_park", "bus_station", "zoo",
 					    "farmyard" }
-landcoverKeys   = { wood="wood", forest="wood",
+    landcoverKeys   = { wood="wood", forest="wood",
                     wetland="wetland",
                     beach="sand", sand="sand",
                     farmland="farmland", farm="farmland", orchard="farmland", vineyard="farmland", plant_nursery="farmland",
@@ -76,18 +78,50 @@ landcoverKeys   = { wood="wood", forest="wood",
 					bare_rock="bare_rock", rock="rock", cliff="cliff",
 					scree="scree",
                     grassland="grass", grass="grass", meadow="grass", allotments="grass", park="grass", village_green="grass", recreation_ground="grass", garden="grass", golf_course="grass" }
+##### Support of 3D buildings
+This is a very nice feature. Do the fact that not all buildings have a hight tags which declares the hight of the building but in some case a building-levels tag. In such a case the value of the buildding-level is taken and calculate for this value an approximate hight.
+Add near line 30:
+
+    -- The height of one floor, in meters
+
+    BUILDING_FLOOR_HEIGHT = 3.66
+    
+Add the end of the lua file:   
+
+	function SetBuildingHeightAttributes(way)
+	local height = tonumber(way:Find("height"), 10)
+	local minHeight = tonumber(way:Find("min_height"), 10)
+	local levels = tonumber(way:Find("building:levels"), 10)
+	local minLevel = tonumber(way:Find("building:min_level"), 10)local renderHeight = BUILDING_FLOOR_HEIGHT
+	if height or levels then
+		renderHeight = height or (levels * BUILDING_FLOOR_HEIGHT)
+	end
+	local renderMinHeight = 0
+	if minHeight or minLevel then
+		renderMinHeight = minHeight or (minLevel * BUILDING_FLOOR_HEIGHT)
+	end
+
+	-- Fix upside-down buildings
+	if renderHeight < renderMinHeight then
+		renderHeight = renderHeight + renderMinHeight
+	end
+
+	way:AttributeNumeric("render_height", renderHeight)
+	way:AttributeNumeric("render_min_height", renderMinHeight)
+    end
 
 
-### sacscale_style.json
-n this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map
+
+### switzerland_style.json
+In this file the look and feel is described, e.E. if a river is persent in which colour and if the river name is shown. This file has to be part of the tileserver-php configuration. Without this file there is nothing to see! Check this blog https://blog.kleunen.nl/blog/tilemaker-generate-map.
+The original file was at many places modified, extended and re ordered. Please the complete file for the source.
 
 ## Tileserver for testing
 To serve your tiles use the demonstration server:
 
-*cd server*
+    cd server*
+    ruby server.rb /path/to/your/switzerland-latest.mbtiles
 
-*ruby server.rb /path/to/your/output.mbtiles*
-
-You can now navigate to http://localhost:8080/ and see your map!
+You can now navigate to http://localhost:8080/ and see your map!  This map is very helpful because it shows from each obkject the attributes as well.
 
 (If you don't already have them, you'll need to install Ruby and the required gems to run the demonstration server. On Ubuntu, for example, sudo apt install sqlite3 libsqlite3-dev ruby ruby-dev and then sudo gem install sqlite3 cgi glug rack.)
