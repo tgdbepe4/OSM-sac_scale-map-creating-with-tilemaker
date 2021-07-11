@@ -4,21 +4,19 @@
 https://sacscale.bergi-it-consulting.ch/index.html
 
 ## Introduction
-The idea is to create a map which shows the difficulties of hiking pathes and tracks for the Open Street Map source. The attribute "sac_scale" can be used in OSM to declare the difficulty of hiking pathes, https://wiki.openstreetmap.org/wiki/DE:Key:sac_scale. At the moment the usage of this attribute is far a way to be compete but in higher alpine regions there many pathes available with it. 
+The idea is to create a map which shows the difficulties of hiking pathes and tracks for the Open Street Map source. The attribute "sac_scale" can be used in OSM to declare the difficulty of hiking pathes, https://wiki.openstreetmap.org/wiki/DE:Key:sac_scale. At the moment the usage of this attribute is far a way to be compete but in higher alpine regions many pathes are available with it. 
 
 ## Tool for creation of vector tiles
-https://github.com/systemed/tilemaker has created an excelent tool to create vector tiles. The tool allows to use as input an OSM pbf file and create from an mbtiles file which can be use from different tile servers. For this project only the tileserver-php software was used. 
-
-
+https://github.com/systemed/tilemaker has created an excelent tool to create vector tiles. The tool allows to use as input an OSM pbf file and create from an mbtiles file which can be used on different tile servers. For this project only the tileserver-php server software was used. 
 
 ## Making of with Switzerland OSM pbf file
 
-On any linux system:
+On any linux system as an example:
 
 * Clone from https://github.com/systemed/tilemaker and follow the installation instructions.
 * Clone https://github.com/maptiler/tileserver-php and follow up the installation instructions.
-* wget http://download.geofabrik.de/europe/switzerland-latest.osm.pbf
-* tilemaker --input switzerland-latest.osm.pbf  --output sacscale.mbtiles  --config resources/config-openmaptiles.json  --process resources/process-openmaptiles.lua
+* wget http://download.geofabrik.de/europe/switzerland-latest.osm.pbf as an example
+* run tilemaker --input switzerland-latest.osm.pbf  --output sacscale.mbtiles  --config resources/config-openmaptiles.json  --process resources/process-openmaptiles.lua
 * cp switzerland.mbtiles /var/www/html/tileserver-php/
 * service apache2 stop  
 * service apache2 start
@@ -28,7 +26,39 @@ On any linux system:
 ### config-openmaptiles.json (config-openmaptiles.json.ori)
 In this file it is configured how detailed the render process goes. And for each layer when the layer is visible (zoom level).
 #### Additonal shapefiles in config
-It is also possible to add own self created shapefiles to the config file.
+It is also possible to add own self created shapefiles to the config file. 
+##### Shapefile for cliffs
+Tilemaker shows cliffs as polygons instead of line. This has the impact that a cliff is show as a filled region. Fortunaltely tilemaker allows to add Shapefile as additional imput. 
+Performed in this way:
+* installation of osmosis software and QGIS
+* On windows run osmosis\bin> .\osmosis.bat --rbf switzerland-latest.osm.pbf --way-key-value keyValueList=natural.cliff --wb cliffs_switzerland_4326.osm.pbf
+* Load the file cliffs_switzerland_4326.osm.pbf into QGIS, select only lines for input
+* Export the layer in 4326 projection as shapefile, cliffs_switzerland_4326.shp
+* Place the generated file into a sub folder of the tilemaker folder
+* Add a line "cliff": 			 { "minzoom": 6,  "maxzoom": 14, "source": "data/cliffs_switzerland_4326.shp"}," near line 28 into file config-openmaptiles.json
+* Add some lines into switzerland_style.json:
+
+    {
+      "id": "cliff",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "cliff",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        ["==", "$type", "LineString"],
+        ["in", "class", "ocean"]
+      ],
+      "layout": {"line-join": "round", "visibility": "visible"},
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {"base": 1.2, "stops": [[14, 1.5], [20, 10]]},
+        "line-opacity": 1
+      }
+    },
+ 
+ Now you be able to see the cliffs as lines
 
 ### process-openmaptiles.lua (process-openmaptiles.lua .ori)
 his file describes which OSM tag is rendered and which attribute are added.
