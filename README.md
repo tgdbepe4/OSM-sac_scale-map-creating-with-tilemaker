@@ -1,4 +1,5 @@
 
+
 # OSM-sac_scale-map-creating-with-tilemaker
 
 ## Demo
@@ -242,3 +243,11 @@ To control the 3D in the browser add after style: 'switzerland_style_3D.json'
     </html>
     <!-- Copy
     © MapboxTermsPrivacySecurity -->
+    
+  ## Experiencs
+  ### Performance
+  I tried to render europe on a 64 GB Ram, 6 CPU computer with a additional swap space of 50 GB. This could work but a gave it up after some days of prcessing. The --store option save some memory but the performance is not better.
+  Result: With a 64 GB computer the maximum pbf file is about 4 GBytes file size. 
+  ### Merging
+  The --merge option allows to merge a new rendered pbf file into an existing mbtiles file. This works in princip very good. I ran several pdb files in on shot via a shell program. This is not recommended because when failing somethin on the way all in the merged mbtiles file is lost.  
+  
