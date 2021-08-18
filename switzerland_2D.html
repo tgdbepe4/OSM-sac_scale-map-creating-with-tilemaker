@@ -14,7 +14,7 @@ body { margin: 0; padding: 0; }
 <body>
 <div id="map"></div>
 <script>
-var bounds = [ [5.893, 45.748], [10.6318, 47.8541] ];
+  var bounds = [[5.31, 45.62], [11.9, 47.88]];
 	mapboxgl.accessToken = 'pk.eyJ1IjoidGdkYmVwZTQiLCJhIjoiY2trYmJxcWZmMGN2cjJucWp2NTZuYnRwMiJ9.6_xPbpP13tLTVNUk2cMq0Q';
 var map = new mapboxgl.Map({
 container: 'map',
@@ -23,7 +23,7 @@ style: 'mapbox://styles/mapbox/light-v10',
   center: [ (bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2],
   center: [8.5, 47.35], // starting position [lng, lat],
     zoom: 14,
-  minZoom: 5,
+  minZoom: 4,
   style: 'switzerland_style_2D.json',
   pitch: 60, // pitch in degrees
   bearing: 20, // bearing in degrees
@@ -49,7 +49,7 @@ map.addLayer({
 },
 'paint': {
 'line-color': '#0387C5',
-'line-width': 0.5
+'line-width': 0.8
 }
 });
 });
