@@ -1,74 +1,128 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta charset="utf-8">
-<title>OSM "sac_scale" map</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>Projekt Onlinekarte mit OSM Kex</title>
+	<style type="text/css">
+		.auto-style1 {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+	</style>
 </head>
+
 <body>
-<div id="map"></div>
-<script>
-var bounds = [ [5.893, 45.748], [10.6318, 47.8541] ];
-	mapboxgl.accessToken = 'pk.eyJ1IjoidGdkYmVwZTQiLCJhIjoiY2trYmJxcWZmMGN2cjJucWp2NTZuYnRwMiJ9.6_xPbpP13tLTVNUk2cMq0Q';
-var map = new mapboxgl.Map({
-container: 'map',
-style: 'mapbox://styles/mapbox/light-v10',
+	<h2 class="auto-style1">Projekt Onlinekarte mit OSM Key "sac_scale"
+	</h2>
+	<span class="auto-style1">OpenStreetMap, OSM, Mapper/Editoren können für Pfade optional den Key "sac_scale"
+		verwenden. Dieser klassifiziert die Schwierigkeit eines Pfades basierend auf der
+		SAC-Skale,https://wiki.openstreetmap.org/wiki/DE:Key:sac_scale. Dieses Projekt hat zum Ziel diese Informationen
+		auf einer Karte zu visualisieren.
+		<br />
+		<br />
+	</span>Bisher sind Karten für folgende Länder verfügbar:
 
-  center: [ (bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2],
-  center: [8.5, 47.35], // starting position [lng, lat],
-    zoom: 14,
-  minZoom: 5,
-  style: 'sacscale_style.json',
-  maxBounds: bounds 
-});
- 
-map.on('load', function () {
-map.addSource('mapbox-terrain', {
-type: 'vector',
-// Use any Mapbox-hosted tileset using its tileset id.
-// Learn more about where to find a tileset id:
-// https://docs.mapbox.com/help/glossary/tileset-id/
-url: 'mapbox://mapbox.mapbox-terrain-v2'
-});
-map.addLayer({
-'id': 'terrain-data',
-'type': 'line',
-'source': 'mapbox-terrain',
-'source-layer': 'contour',
-'layout': {
-'line-join': 'round',
-'line-cap': 'round'
-},
-'paint': {
-'line-color': '#0387C5',
-'line-width': 0.5
-}
-});
-});
+	<br />
+	<ul>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/switzerland_2D.html">Schweiz 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/switzerland.html">Schweiz 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/liechtenstein_2D.html">Liechtenstein 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/liechtenstein.html">Liechtenstein 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/austria_2D.html">Österreich 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/austria.html">Österreich 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/germany_2D.html">Deutschland 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/germany.html">Deutschland 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/luxembourg_2D.html">Luxenburg 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/luxembourg.html">Luxenburg 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/belgium_2D.html">Belgien 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/belgium.html">Belgien 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/netherlands_2D.html">Niederlande 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/netherlands.html">Niederlande 3D</a>
+		</li>
+		<a href="https://bruwi62.synology.me:4712/france_2D.html">Frankreich 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/france.html">Frankreich 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/italy_2D.html">Italien 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/italy.html">Italien 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/spain_2D.html">Spanien 2D </a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/spain.html">Spanien 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/andorra_2D.html">Andorra 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/andorra.html">Andorra 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/great-britain_2D.html">Grossbritanien 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/great-britain.html">Grossbritanien 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/ireland-and-northern-ireland_2D.html">Irland und Nordirland 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/ireland-and-northern-ireland.html">Irland und Nordirland 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/portugal_2D.html">Portugal 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/portugal.html">Portugal 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/canary-islands_2D.html">Kanarische Inseln 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/canary-islands.html">Kanarische Inseln 3D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/europe_2D.html">Europa 2D</a>
+		</li>
+		<li class="auto-style1">
+			<a href="https://bruwi62.synology.me:4712/europe.html">Europa 3D</a>
+		</li>
+	</ul>
+	<p>&nbsp;</p>
 
-map.addControl(new mapboxgl.NavigationControl());
-map.addControl(new mapboxgl.FullscreenControl());
-// Add geolocate control to the map.
-map.addControl(
-new mapboxgl.GeolocateControl({
-positionOptions: {
-enableHighAccuracy: true
-},
-trackUserLocation: true
-})
-);
-</script>
-<div id="osm">©<a href="http://www.openstreetmap.org">OpenStreetMap</a>
-  und <a href="http://www.openstreetmap.org/copyright">Mitwirkende</a>,
-  <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.de">CC-BY-SA</a>
-</div>
 </body>
+
 </html>
-Copy
-© MapboxTermsPrivacySecurity
