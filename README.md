@@ -86,47 +86,25 @@ Performed in this way:
 * Add a line "cliff": { "minzoom": 6, "maxzoom": 14, "source": "data/cliffs_switzerland_4326.shp"}," near line 28 into file config-openmaptiles.json
 
 * Add some lines into switzerland_style.json:
-
-  
-
-{
-
-"id": "cliff",
-
-"type": "line",
-
-"source": "openmaptiles",
-
-"source-layer": "cliff",
-
-"minzoom": 13,
-
-"maxzoom": 24,
-
-"filter": [
-
-"all",
-
-["==", "$type", "LineString"],
-
-["in", "class", "ocean"]
-
-],
-
-"layout": {"line-join": "round", "visibility": "visible"},
-
-"paint": {
-
-"line-color": "rgba(0, 0, 0, 1)",
-
-"line-width": {"base": 1.2, "stops": [[14, 1.5], [20, 10]]},
-
-"line-opacity": 1
-
-}
-
-},
-
+     
+      {  
+      "id": "cliff",  
+      "type": "line",  
+      "source": "openmaptiles",    "source-layer": "cliff",  
+      "minzoom": 13,  
+      "maxzoom": 24,  
+      "filter": [  
+      "all",  
+      ["==", "$type", "LineString"],  
+      ["in", "class", "ocean"]  
+      ],  
+      "layout": {"line-join": "round", "visibility": "visible"},  
+      "paint": {  
+      "line-color": "rgba(0, 0, 0, 1)",  
+      "line-width": {"base": 1.2, "stops": [[14, 1.5], [20, 10]]},  
+      "line-opacity": 1  
+      }  
+      },
 Now you be able to see the cliffs as lines
 
   
@@ -343,7 +321,7 @@ I tried to render europe on a 64 GB Ram, 6 CPU computer with a additional swap s
 
 The --merge option allows to merge a new rendered pbf file into an existing mbtiles file. This works in princip very good. I ran several pdb files in on shot via a shell program. This is not recommended because when failing somethin on the way all in the merged mbtiles file is lost.
 
-### Church tower disturb the result.
+### Church tower high disturb the result.
 In OSM the churches are only build as a polygon of the full part of the church and the high of the tower is added as the high. The result in 3D is a big block of a building with has the high of the tower. I looks like that a town is full of sky scrapers!
 To reduce this a add some code in the process-openmaptiles.lua file which make the tag of "amenity" with value "place_of_worship" to a fix high of 22 meters:
 
